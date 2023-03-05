@@ -1,12 +1,11 @@
 class User < ActiveRecord::Base
+  has_many :links
+  has_many :projects, through: :links
 
-    has_many :links
-    has_many :projects, through: :links
-
-    # table consists of password_hash as a column to store password hashes in DB
+  # table consists of password_hash as a column to store password hashes in DB
   include BCrypt
 
-    # retrieve password from hash
+  # retrieve password from hash
   def password
     @password ||= Password.new(passwordHash)
   end
