@@ -11,7 +11,7 @@ class UserController < ApplicationController
   end
 
 #  registers a new user to the data base
-  post '/auth/register' do
+  post '/register' do
     begin
       users = User.create(@user)
       users.to_json
@@ -21,16 +21,16 @@ class UserController < ApplicationController
   end
 
   # logs in user using email and password
-  post '/auth/login' do
+  post '/login' do
     begin
       user_data = User.find_by(email: @user['email'])
       if user_data.passwordHash == @user['passwordHash']
-        json_response(code: 200, data: {
+        response(code: 200, data: {
           id: user_data.id,
           email: user_data.email
         })
       else
-        json_response(code: 422, data: { message: "Your email/password combination is not correct" })
+        response(code: 422, data: { message: "Your email/password combination is not correct" })
       end
     rescue => e
         { error: e.message }.to_json
@@ -57,12 +57,12 @@ class UserController < ApplicationController
 
   private
 
-  # @helper: parse user JSON data
+  # parse  JSON data
   def user_data
     JSON.parse(request.body.read)
   end
 
-  def json_response(code: 200, data: nil)
+  def response(code: 200, data: nil)
     status = [200, 201].include?(code) ? "SUCCESS" : "FAILED"
     headers['Content-Type'] = 'application/json'
     if data

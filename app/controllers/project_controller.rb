@@ -7,6 +7,9 @@ class ProjectController < ApplicationController
         projects.to_json
     end
 
+
+    # gives the names of the members of the project
+
     get '/project/members/:id' do
 
         project = Project.find_by(id: params[:id].to_i)
@@ -14,6 +17,8 @@ class ProjectController < ApplicationController
         members.to_json
 
     end
+
+    # creates a project
 
     post '/project/create/:id' do
         data = JSON.parse(request.body.read)
@@ -61,14 +66,17 @@ class ProjectController < ApplicationController
 
     end
 
+
+    # updates a project
+
     put '/project/update/:id' do
         data = JSON.parse(request.body.read)
         begin
             project = Project.find(params[:id].to_i)
             project.update(data)
-            json_response(data: { message: "Project updated successfully" })
+            response(data: { message: "Project updated successfully" })
         rescue => e
-            json_response(code: 422 ,data: { error: e.message })
+            response(code: 422 ,data: { error: e.message })
         end
     end
 
@@ -81,9 +89,9 @@ class ProjectController < ApplicationController
         begin
             project = Project.find(params[:id].to_i)
             project.update(data)
-            json_response(data: { message: "status updated successfully" })
+            response(data: { message: "status updated successfully" })
         rescue => e
-            json_response(code: 422,data: { error: e.message })
+            response(code: 422,data: { error: e.message })
         end
 
     end
@@ -98,7 +106,7 @@ class ProjectController < ApplicationController
             project = Project.find(params[:id].to_i)
             project.destroy
             
-            json_response(data: { message: "project deleted successfully" })
+            response(data: { message: "project deleted successfully" })
 
 
         rescue => e
