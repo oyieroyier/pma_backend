@@ -53,7 +53,7 @@ GEM
       concurrent-ruby (~> 1.0)
 
 PLATFORMS
-  x86_64-darwin-22
+  bundle lock --add-platform x86_64-linux
 
 DEPENDENCIES
   activerecord (~> 7.0, >= 7.0.4.2)
