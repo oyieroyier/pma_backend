@@ -29,19 +29,6 @@ class ProjectController < ApplicationController
     end
   end
 
-  # post '/link/create' do
-  #     data = JSON.parse(request.body.read)
-  #     begin
-
-  #         link = Link.create(data)
-
-  #         link.to_json
-
-  #     rescue => e
-  #         { error: e.message }.to_json
-  #     end
-  # end
-
   # gets the project id, search a user by name and adds the user as a member of the project
 
   post '/member/add/:userId/:projectId' do

@@ -10,7 +10,8 @@ puts 'Seeding that thing'
   Project.create(
     title: Faker::Job.title,
     description: Faker::Lorem.sentence,
-    status: rand(0..3),
+    details: Faker::Lorem.paragraphs,
+    status: rand(0..3)
   )
 
   User.create(

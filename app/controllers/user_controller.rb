@@ -37,13 +37,13 @@ class UserController < ApplicationController
     end
   end
 
-  #    displays all users
+  # displays all users
   get '/users' do
     user = User.all
     user.to_json
   end
 
-  #gets all projects a user has
+  # gets all projects a user has
 
   get '/user/projects/:id' do
     user = User.find_by(id: params[:id])
