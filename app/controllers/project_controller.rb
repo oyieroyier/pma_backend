@@ -6,8 +6,14 @@ class ProjectController < ApplicationController
     projects.to_json
   end
 
-  # gives the names of the members of the project
+  # gives one project
 
+  get '/project/:id' do
+    project = Project.find(params[:id])
+    project.to_json
+  end
+
+  # gives the names of the members of the project
   get '/project/members/:id' do
     project = Project.find_by(id: params[:id].to_i)
     members = project.users
